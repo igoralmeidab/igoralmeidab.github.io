@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts | Igor de Almeida</title>
+    <link>https://igoralmeidab.github.io/post/</link>
+      <atom:link href="https://igoralmeidab.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>Posts</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>2021</copyright><lastBuildDate>Sun, 04 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://igoralmeidab.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
+      <title>Posts</title>
+      <link>https://igoralmeidab.github.io/post/</link>
+    </image>
+    
+    <item>
+      <title>A map of Japanese collectivism</title>
+      <link>https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/</link>
+      <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/</guid>
+      <description>
+&lt;script src=&#34;https://igoralmeidab.github.io/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;This visualisation is based on Niwako Yamawaki’s academic article [1] and &lt;a href=&#34;https://qiita.com/masaki_kubota/items/98ddec63492a8d71f9d1&#34;&gt;Masaki Kubota’s R code&lt;/a&gt; [2].&lt;/p&gt;
+&lt;p&gt;Collectivism is defined in the Oxford dictionary as “the practice or principle of giving a group priority over each individual in it.”&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;jp_collectivism&amp;lt;- read_delim(&amp;quot;jp_collectivism.csv&amp;quot;, 
+                             &amp;quot;;&amp;quot;, escape_double = FALSE, trim_ws = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   Rank = col_double(),
+##   Prefecture = col_character(),
+##   Score = col_double()
+## )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;information japan map&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;JP_plot &amp;lt;- tribble(
+  ~Prefecture_jp,~Prefecture ,~Code, ~x, ~y,
+  &amp;quot;北海道&amp;quot;, &amp;quot;Hokkaido&amp;quot;,&amp;quot;HK&amp;quot;, 16, 14,
+  &amp;quot;青森県&amp;quot;,&amp;quot;Aomori&amp;quot;　,&amp;quot;AO&amp;quot;, 15, 11,
+  &amp;quot;岩手県&amp;quot;,&amp;quot;Iwate&amp;quot;　,&amp;quot;IT&amp;quot;, 15, 10,
+  &amp;quot;宮城県&amp;quot;,&amp;quot;Miyagi&amp;quot;　,&amp;quot;MG&amp;quot;, 15, 9,
+  &amp;quot;秋田県&amp;quot;,&amp;quot;Akita&amp;quot;　,&amp;quot;AK&amp;quot;, 14, 10,
+  &amp;quot;山形県&amp;quot;,&amp;quot;Yamagata&amp;quot;　,&amp;quot;YG&amp;quot;, 14, 9,
+  &amp;quot;福島県&amp;quot;,&amp;quot;Fukushima&amp;quot;　,&amp;quot;FS&amp;quot;, 15, 8,
+  &amp;quot;茨城県&amp;quot;,&amp;quot;Ibaraki&amp;quot;　,&amp;quot;IB&amp;quot;, 15, 6,
+  &amp;quot;栃木県&amp;quot;,&amp;quot;Tochigi&amp;quot;　,&amp;quot;TC&amp;quot;, 15, 7,
+  &amp;quot;群馬県&amp;quot;,&amp;quot;Gunma&amp;quot;　,&amp;quot;GU&amp;quot;, 14, 7,
+  &amp;quot;埼玉県&amp;quot;,&amp;quot;Saitama&amp;quot;　,&amp;quot;ST&amp;quot;, 14, 6,
+  &amp;quot;千葉県&amp;quot;,&amp;quot;Chiba&amp;quot;　,&amp;quot;CB&amp;quot;, 15, 5,
+  &amp;quot;東京都&amp;quot;,　&amp;quot;Tokyo&amp;quot;,&amp;quot;TY&amp;quot;, 14, 5,
+  &amp;quot;神奈川県&amp;quot;,&amp;quot;Kanagawa&amp;quot;,　&amp;quot;KN&amp;quot;, 14, 4,
+  &amp;quot;新潟県&amp;quot;,&amp;quot;Niigata&amp;quot;,　&amp;quot;NI&amp;quot;, 14, 8,
+  &amp;quot;富山県&amp;quot;,&amp;quot;Toyama&amp;quot;,　&amp;quot;TM&amp;quot;, 13, 7,
+  &amp;quot;石川県&amp;quot;,&amp;quot;Ishikawa&amp;quot;,　&amp;quot;IS&amp;quot;, 12, 7,
+  &amp;quot;福井県&amp;quot;,&amp;quot;Fukui&amp;quot;,　&amp;quot;FI&amp;quot;, 12, 6,
+  &amp;quot;山梨県&amp;quot;,&amp;quot;Yamanashi&amp;quot;,　&amp;quot;YN&amp;quot;, 13, 5,
+  &amp;quot;長野県&amp;quot;,&amp;quot;Nagano&amp;quot;,　&amp;quot;NA&amp;quot;, 13, 6,
+  &amp;quot;岐阜県&amp;quot;,&amp;quot;Gifu&amp;quot;,　&amp;quot;GI&amp;quot;, 12, 5,
+  &amp;quot;静岡県&amp;quot;,&amp;quot;Shizuoka&amp;quot;,　&amp;quot;SZ&amp;quot;, 13, 4,
+  &amp;quot;愛知県&amp;quot;,&amp;quot;Aichi&amp;quot;,　&amp;quot;AI&amp;quot;, 12, 4,
+  &amp;quot;三重県&amp;quot;,&amp;quot;Mie&amp;quot;,　&amp;quot;ME&amp;quot;, 11, 4,
+  &amp;quot;滋賀県&amp;quot;,&amp;quot;Shiga&amp;quot;,　&amp;quot;SI&amp;quot;, 11, 5,
+  &amp;quot;京都府&amp;quot;,&amp;quot;Kyoto&amp;quot;,　&amp;quot;KY&amp;quot;, 10, 5,
+  &amp;quot;大阪府&amp;quot;,&amp;quot;Osaka&amp;quot;,　&amp;quot;OS&amp;quot;, 9, 5,
+  &amp;quot;兵庫県&amp;quot;,&amp;quot;Hyogo&amp;quot;,　&amp;quot;HG&amp;quot;, 8, 5,
+  &amp;quot;奈良県&amp;quot;,&amp;quot;Nara&amp;quot;,　&amp;quot;NR&amp;quot;, 10, 4,
+  &amp;quot;和歌山県&amp;quot;,&amp;quot;Wakayama&amp;quot;,　&amp;quot;WA&amp;quot;, 9, 4,
+  &amp;quot;鳥取県&amp;quot;,&amp;quot;Tottori&amp;quot;,　&amp;quot;TT&amp;quot;, 7, 5,
+  &amp;quot;島根県&amp;quot;,&amp;quot;Shimane&amp;quot;,　&amp;quot;SM&amp;quot;, 6, 5,
+  &amp;quot;岡山県&amp;quot;,&amp;quot;Okayama&amp;quot;,　&amp;quot;OY&amp;quot;, 7, 4,
+  &amp;quot;広島県&amp;quot;,&amp;quot;Hiroshima&amp;quot;,　&amp;quot;HS&amp;quot;, 6, 4,
+  &amp;quot;山口県&amp;quot;,&amp;quot;Yamaguchi&amp;quot;,　&amp;quot;YA&amp;quot;, 5, 5,
+  &amp;quot;徳島県&amp;quot;,&amp;quot;Tokushima&amp;quot;　,&amp;quot;TK&amp;quot;, 7, 1,
+  &amp;quot;香川県&amp;quot;,&amp;quot;Kagawa&amp;quot;　,&amp;quot;KA&amp;quot;, 7, 2,
+  &amp;quot;愛媛県&amp;quot;,&amp;quot;Ehime&amp;quot;　,&amp;quot;EH&amp;quot;, 6, 2,
+  &amp;quot;高知県&amp;quot;,&amp;quot;Kochi&amp;quot;,　&amp;quot;KO&amp;quot;, 6, 1,
+  &amp;quot;福岡県&amp;quot;,&amp;quot;Fukuoka&amp;quot;　,&amp;quot;FO&amp;quot;, 4, 3,
+  &amp;quot;佐賀県&amp;quot;,&amp;quot;Saga&amp;quot;　,&amp;quot;SG&amp;quot;, 3, 3,
+  &amp;quot;長崎県&amp;quot;,&amp;quot;Nagasaki&amp;quot;,　&amp;quot;NS&amp;quot;, 2, 3,
+  &amp;quot;熊本県&amp;quot;,&amp;quot;Kumamoto&amp;quot;　,&amp;quot;KU&amp;quot;, 3, 2,
+  &amp;quot;大分県&amp;quot;,&amp;quot;Oita&amp;quot;　,&amp;quot;OI&amp;quot;, 4, 2,
+  &amp;quot;宮崎県&amp;quot;,&amp;quot;Miyazaki&amp;quot;　,&amp;quot;MZ&amp;quot;, 4, 1,
+  &amp;quot;鹿児島県&amp;quot;,&amp;quot;Kagoshima&amp;quot; ,&amp;quot;KG&amp;quot;, 3, 1,
+  &amp;quot;沖縄県&amp;quot;,&amp;quot;Okinawa&amp;quot;　,&amp;quot;OK&amp;quot;, 1, 1)
+
+# Define Map sizes
+JP_plot&amp;lt;- JP_plot %&amp;gt;% mutate(scale = c(3,rep(1,46)))# because hokkaido is larger than the other prefectures&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;jp_collectivism&amp;lt;- jp_collectivism %&amp;gt;%  left_join(JP_plot,by= &amp;quot;Prefecture&amp;quot;)
+
+##########
+
+
+
+graph&amp;lt;- jp_collectivism %&amp;gt;% # data itself
+  ggplot(aes(x = x, # x axis
+             y = y, # y axis
+             width = scale, # scale of width
+             height = scale)) +  #scale of height
+  geom_tile(aes(fill = Score), color = &amp;quot;black&amp;quot;) + # variable used to calculate the colour filling of the tiles
+ geom_text(aes(label = Code), size = 2.7, color = &amp;quot;red&amp;quot; ) +   # label and its size and colour
+  coord_fixed(ratio = 1) +  # to keep the ratio between the representation of data and axis
+  theme( # no background, axis, title, ticks or legend
+    panel.background = element_blank(),
+    panel.grid = element_blank(),
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    legend.position = &amp;quot;none&amp;quot;)  +
+
+  scale_fill_gradient2(low=&amp;quot;black&amp;quot;, # gradient colours
+                     mid=&amp;quot;#DDDDDD&amp;quot;,
+                     high=&amp;quot;grey50&amp;quot;,
+                     midpoint = 50) # gradient midpoint&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(graph)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;[1] Yamawaki, N. (2012). Within-culture variations of collectivism in Japan. Journal of Cross-Cultural Psychology, 43(8), 1191-1204.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Employee engagement survey feedback with R</title>
+      <link>https://igoralmeidab.github.io/post/employee-engagement-survey-feedback-with-r/</link>
+      <pubDate>Sun, 05 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>https://igoralmeidab.github.io/post/employee-engagement-survey-feedback-with-r/</guid>
+      <description>
+
+
+
+</description>
+    </item>
+    
+    <item>
+      <title>Maps</title>
+      <link>https://igoralmeidab.github.io/post/maps/</link>
+      <pubDate>Fri, 24 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://igoralmeidab.github.io/post/maps/</guid>
+      <description>
+&lt;script src=&#34;https://igoralmeidab.github.io/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;r-markdown&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;R Markdown&lt;/h2&gt;
+&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;When you click the &lt;strong&gt;Knit&lt;/strong&gt; button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(cars)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;including-plots&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Including Plots&lt;/h2&gt;
+&lt;p&gt;You can also embed plots, for example:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://igoralmeidab.github.io/post/maps_files/figure-html/pressure-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: パッケージ &amp;#39;tidyverse&amp;#39; はバージョン 3.6.3 の R の下で造られました&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;lt;U+2713&amp;gt; ggplot2 3.3.2     &amp;lt;U+2713&amp;gt; purrr   0.3.4
+## &amp;lt;U+2713&amp;gt; tibble  3.0.4     &amp;lt;U+2713&amp;gt; dplyr   1.0.2
+## &amp;lt;U+2713&amp;gt; tidyr   1.0.0     &amp;lt;U+2713&amp;gt; stringr 1.4.0
+## &amp;lt;U+2713&amp;gt; readr   1.3.1     &amp;lt;U+2713&amp;gt; forcats 0.5.0&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: パッケージ &amp;#39;ggplot2&amp;#39; はバージョン 3.6.3 の R の下で造られました&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: パッケージ &amp;#39;tibble&amp;#39; はバージョン 3.6.3 の R の下で造られました&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: パッケージ &amp;#39;purrr&amp;#39; はバージョン 3.6.3 の R の下で造られました&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: パッケージ &amp;#39;dplyr&amp;#39; はバージョン 3.6.3 の R の下で造られました&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: パッケージ &amp;#39;forcats&amp;#39; はバージョン 3.6.3 の R の下で造られました&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## ── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;Orange %&amp;gt;%  ggplot()+
+geom_point(aes(x=age,y=circumference, color=Tree))  &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://igoralmeidab.github.io/post/maps_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Note that the &lt;code&gt;echo = FALSE&lt;/code&gt; parameter was added to the code chunk to prevent printing of the R code that generated the plot.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Visualisations for articles</title>
+      <link>https://igoralmeidab.github.io/post/visualisations-for-articles/</link>
+      <pubDate>Fri, 24 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://igoralmeidab.github.io/post/visualisations-for-articles/</guid>
+      <description>
+
+
+&lt;p&gt;The R Package ggplot2 is very powerful, elegant, and popular among scientists. However, not many of them take the necessary time to (learn how to) make graphs suitable for scientific articles. For this reason, I prepared a tutorial/cookbook/gallery with some plots I’ve used for articles and presentations.
+For this tutorial you need some basic knowledge of R and tidyverse. If that is not your case yet you can start learning it from here(link to r for data science) and here ().&lt;/p&gt;
+&lt;p&gt;psychology social science research&lt;/p&gt;
+&lt;p&gt;citation, buy me a coffee&lt;/p&gt;
+&lt;div id=&#34;distribution&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Distribution&lt;/h2&gt;
+&lt;p&gt;histogram&lt;/p&gt;
+&lt;p&gt;scatterplot&lt;/p&gt;
+&lt;p&gt;aaaa&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;hist(rnorm(50))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://igoralmeidab.github.io/post/2020-01-24-visualisations-for-articles_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mean-comparison&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Mean comparison&lt;/h1&gt;
+&lt;p&gt;Other references&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;regression-slopes&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Regression slopes&lt;/h1&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
