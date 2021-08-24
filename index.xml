@@ -5,7 +5,7 @@
     <link>https://igoralmeidab.github.io/</link>
       <atom:link href="https://igoralmeidab.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Igor de Almeida</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>2021</copyright><lastBuildDate>Sun, 04 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>2021</copyright><lastBuildDate>Sun, 13 Jun 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://igoralmeidab.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png</url>
       <title>Igor de Almeida</title>
@@ -42,6 +42,14 @@
   &lt;/div&gt;
 &lt;/div&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Cultural differences in music features across Taiwanese, Japanese and American markets</title>
+      <link>https://igoralmeidab.github.io/publication/music-peerj-kong/</link>
+      <pubDate>Sun, 13 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://igoralmeidab.github.io/publication/music-peerj-kong/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -150,6 +158,14 @@ graph&amp;lt;- jp_collectivism %&amp;gt;% # data itself
     </item>
     
     <item>
+      <title>AMAE: AN EMOTION TO UNDERSTAND THE JAPANESE PSYCHE (original in Portuguese)</title>
+      <link>https://igoralmeidab.github.io/publication/amae-pt/</link>
+      <pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate>
+      <guid>https://igoralmeidab.github.io/publication/amae-pt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Employee engagement survey feedback with R</title>
       <link>https://igoralmeidab.github.io/post/employee-engagement-survey-feedback-with-r/</link>
       <pubDate>Sun, 05 Apr 2020 00:00:00 +0000</pubDate>
@@ -238,6 +254,14 @@ For this tutorial you need some basic knowledge of R and tidyverse. If that is n
 &lt;h1&gt;Regression slopes&lt;/h1&gt;
 &lt;/div&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>EXAMINING AFFECTIVE VALENCE IN JAPANESE AND BRAZILIAN CULTURAL PRODUCTS: AN ANALYSIS ON EMOTIONAL WORDS IN SONG LYRICS AND NEWS ARTICLES</title>
+      <link>https://igoralmeidab.github.io/publication/affective-valence-in-cultural-products-brazil-japan/</link>
+      <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
+      <guid>https://igoralmeidab.github.io/publication/affective-valence-in-cultural-products-brazil-japan/</guid>
+      <description></description>
     </item>
     
   </channel>
