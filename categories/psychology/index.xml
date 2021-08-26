@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>A map of Japanese collectivism</title>
+      <title>Tile maps of Japanese collectivism</title>
       <link>https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/</link>
       <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
       <guid>https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/</guid>
@@ -22,8 +22,23 @@
 
 
 &lt;p&gt;This visualisation is based on Niwako Yamawaki’s academic article [1] and &lt;a href=&#34;https://qiita.com/masaki_kubota/items/98ddec63492a8d71f9d1&#34;&gt;Masaki Kubota’s R code&lt;/a&gt; [2].&lt;/p&gt;
-&lt;p&gt;Collectivism is defined in the Oxford dictionary as “the practice or principle of giving a group priority over each individual in it.”&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;jp_collectivism&amp;lt;- read_delim(&amp;quot;jp_collectivism.csv&amp;quot;, 
+&lt;p&gt;Collectivism is defined in the Oxford dictionary as “the practice or principle of giving a group priority over each individual in it.”&lt;br /&gt;
+Yamawaki measured collectivism based on divorce to marriage rate, percentage of households with three generations living together, percentage of elderly people (aged 65+ years) living alone (reverse scored), percentage of nuclear family households (reverse scored), and percentage of people living alone (reverse scored). Then, a scale was created and each Japanese prefecture got a score. See details in the original article.&lt;/p&gt;
+&lt;p&gt;Here I got these scores of collectivism, combined with Kubora’s code, and made two tile maps of Japan.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Packages
+library(dplyr)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  次のパッケージを付け加えます: &amp;#39;dplyr&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  以下のオブジェクトは &amp;#39;package:stats&amp;#39; からマスクされています: 
+## 
+##      filter, lag&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  以下のオブジェクトは &amp;#39;package:base&amp;#39; からマスクされています: 
+## 
+##      intersect, setdiff, setequal, union&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+library(readr)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Data with collectivism scores
+jp_collectivism&amp;lt;- read_delim(&amp;quot;jp_collectivism.csv&amp;quot;, 
                              &amp;quot;;&amp;quot;, escape_double = FALSE, trim_ws = TRUE)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## 
 ## -- Column specification --------------------------------------------------------
@@ -32,65 +47,68 @@
 ##   Prefecture = col_character(),
 ##   Score = col_double()
 ## )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;information japan map&lt;/p&gt;
+&lt;div id=&#34;data-necessary-to-plot-the-tile-maps&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Data necessary to plot the tile maps&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;JP_plot &amp;lt;- tribble(
   ~Prefecture_jp,~Prefecture ,~Code, ~x, ~y,
   &amp;quot;北海道&amp;quot;, &amp;quot;Hokkaido&amp;quot;,&amp;quot;HK&amp;quot;, 16, 14,
-  &amp;quot;青森県&amp;quot;,&amp;quot;Aomori&amp;quot;　,&amp;quot;AO&amp;quot;, 15, 11,
-  &amp;quot;岩手県&amp;quot;,&amp;quot;Iwate&amp;quot;　,&amp;quot;IT&amp;quot;, 15, 10,
-  &amp;quot;宮城県&amp;quot;,&amp;quot;Miyagi&amp;quot;　,&amp;quot;MG&amp;quot;, 15, 9,
-  &amp;quot;秋田県&amp;quot;,&amp;quot;Akita&amp;quot;　,&amp;quot;AK&amp;quot;, 14, 10,
-  &amp;quot;山形県&amp;quot;,&amp;quot;Yamagata&amp;quot;　,&amp;quot;YG&amp;quot;, 14, 9,
-  &amp;quot;福島県&amp;quot;,&amp;quot;Fukushima&amp;quot;　,&amp;quot;FS&amp;quot;, 15, 8,
-  &amp;quot;茨城県&amp;quot;,&amp;quot;Ibaraki&amp;quot;　,&amp;quot;IB&amp;quot;, 15, 6,
-  &amp;quot;栃木県&amp;quot;,&amp;quot;Tochigi&amp;quot;　,&amp;quot;TC&amp;quot;, 15, 7,
-  &amp;quot;群馬県&amp;quot;,&amp;quot;Gunma&amp;quot;　,&amp;quot;GU&amp;quot;, 14, 7,
-  &amp;quot;埼玉県&amp;quot;,&amp;quot;Saitama&amp;quot;　,&amp;quot;ST&amp;quot;, 14, 6,
-  &amp;quot;千葉県&amp;quot;,&amp;quot;Chiba&amp;quot;　,&amp;quot;CB&amp;quot;, 15, 5,
-  &amp;quot;東京都&amp;quot;,　&amp;quot;Tokyo&amp;quot;,&amp;quot;TY&amp;quot;, 14, 5,
-  &amp;quot;神奈川県&amp;quot;,&amp;quot;Kanagawa&amp;quot;,　&amp;quot;KN&amp;quot;, 14, 4,
-  &amp;quot;新潟県&amp;quot;,&amp;quot;Niigata&amp;quot;,　&amp;quot;NI&amp;quot;, 14, 8,
-  &amp;quot;富山県&amp;quot;,&amp;quot;Toyama&amp;quot;,　&amp;quot;TM&amp;quot;, 13, 7,
-  &amp;quot;石川県&amp;quot;,&amp;quot;Ishikawa&amp;quot;,　&amp;quot;IS&amp;quot;, 12, 7,
-  &amp;quot;福井県&amp;quot;,&amp;quot;Fukui&amp;quot;,　&amp;quot;FI&amp;quot;, 12, 6,
-  &amp;quot;山梨県&amp;quot;,&amp;quot;Yamanashi&amp;quot;,　&amp;quot;YN&amp;quot;, 13, 5,
-  &amp;quot;長野県&amp;quot;,&amp;quot;Nagano&amp;quot;,　&amp;quot;NA&amp;quot;, 13, 6,
-  &amp;quot;岐阜県&amp;quot;,&amp;quot;Gifu&amp;quot;,　&amp;quot;GI&amp;quot;, 12, 5,
-  &amp;quot;静岡県&amp;quot;,&amp;quot;Shizuoka&amp;quot;,　&amp;quot;SZ&amp;quot;, 13, 4,
-  &amp;quot;愛知県&amp;quot;,&amp;quot;Aichi&amp;quot;,　&amp;quot;AI&amp;quot;, 12, 4,
-  &amp;quot;三重県&amp;quot;,&amp;quot;Mie&amp;quot;,　&amp;quot;ME&amp;quot;, 11, 4,
-  &amp;quot;滋賀県&amp;quot;,&amp;quot;Shiga&amp;quot;,　&amp;quot;SI&amp;quot;, 11, 5,
-  &amp;quot;京都府&amp;quot;,&amp;quot;Kyoto&amp;quot;,　&amp;quot;KY&amp;quot;, 10, 5,
-  &amp;quot;大阪府&amp;quot;,&amp;quot;Osaka&amp;quot;,　&amp;quot;OS&amp;quot;, 9, 5,
-  &amp;quot;兵庫県&amp;quot;,&amp;quot;Hyogo&amp;quot;,　&amp;quot;HG&amp;quot;, 8, 5,
-  &amp;quot;奈良県&amp;quot;,&amp;quot;Nara&amp;quot;,　&amp;quot;NR&amp;quot;, 10, 4,
-  &amp;quot;和歌山県&amp;quot;,&amp;quot;Wakayama&amp;quot;,　&amp;quot;WA&amp;quot;, 9, 4,
-  &amp;quot;鳥取県&amp;quot;,&amp;quot;Tottori&amp;quot;,　&amp;quot;TT&amp;quot;, 7, 5,
-  &amp;quot;島根県&amp;quot;,&amp;quot;Shimane&amp;quot;,　&amp;quot;SM&amp;quot;, 6, 5,
-  &amp;quot;岡山県&amp;quot;,&amp;quot;Okayama&amp;quot;,　&amp;quot;OY&amp;quot;, 7, 4,
-  &amp;quot;広島県&amp;quot;,&amp;quot;Hiroshima&amp;quot;,　&amp;quot;HS&amp;quot;, 6, 4,
-  &amp;quot;山口県&amp;quot;,&amp;quot;Yamaguchi&amp;quot;,　&amp;quot;YA&amp;quot;, 5, 5,
-  &amp;quot;徳島県&amp;quot;,&amp;quot;Tokushima&amp;quot;　,&amp;quot;TK&amp;quot;, 7, 1,
-  &amp;quot;香川県&amp;quot;,&amp;quot;Kagawa&amp;quot;　,&amp;quot;KA&amp;quot;, 7, 2,
-  &amp;quot;愛媛県&amp;quot;,&amp;quot;Ehime&amp;quot;　,&amp;quot;EH&amp;quot;, 6, 2,
-  &amp;quot;高知県&amp;quot;,&amp;quot;Kochi&amp;quot;,　&amp;quot;KO&amp;quot;, 6, 1,
-  &amp;quot;福岡県&amp;quot;,&amp;quot;Fukuoka&amp;quot;　,&amp;quot;FO&amp;quot;, 4, 3,
-  &amp;quot;佐賀県&amp;quot;,&amp;quot;Saga&amp;quot;　,&amp;quot;SG&amp;quot;, 3, 3,
-  &amp;quot;長崎県&amp;quot;,&amp;quot;Nagasaki&amp;quot;,　&amp;quot;NS&amp;quot;, 2, 3,
-  &amp;quot;熊本県&amp;quot;,&amp;quot;Kumamoto&amp;quot;　,&amp;quot;KU&amp;quot;, 3, 2,
-  &amp;quot;大分県&amp;quot;,&amp;quot;Oita&amp;quot;　,&amp;quot;OI&amp;quot;, 4, 2,
-  &amp;quot;宮崎県&amp;quot;,&amp;quot;Miyazaki&amp;quot;　,&amp;quot;MZ&amp;quot;, 4, 1,
-  &amp;quot;鹿児島県&amp;quot;,&amp;quot;Kagoshima&amp;quot; ,&amp;quot;KG&amp;quot;, 3, 1,
-  &amp;quot;沖縄県&amp;quot;,&amp;quot;Okinawa&amp;quot;　,&amp;quot;OK&amp;quot;, 1, 1)
+  &amp;quot;青森&amp;quot;,&amp;quot;Aomori&amp;quot;　,&amp;quot;AO&amp;quot;, 15, 11,
+  &amp;quot;岩手&amp;quot;,&amp;quot;Iwate&amp;quot;　,&amp;quot;IT&amp;quot;, 15, 10,
+  &amp;quot;宮城&amp;quot;,&amp;quot;Miyagi&amp;quot;　,&amp;quot;MG&amp;quot;, 15, 9,
+  &amp;quot;秋田&amp;quot;,&amp;quot;Akita&amp;quot;　,&amp;quot;AK&amp;quot;, 14, 10,
+  &amp;quot;山形&amp;quot;,&amp;quot;Yamagata&amp;quot;　,&amp;quot;YG&amp;quot;, 14, 9,
+  &amp;quot;福島&amp;quot;,&amp;quot;Fukushima&amp;quot;　,&amp;quot;FS&amp;quot;, 15, 8,
+  &amp;quot;茨城&amp;quot;,&amp;quot;Ibaraki&amp;quot;　,&amp;quot;IB&amp;quot;, 15, 6,
+  &amp;quot;栃木&amp;quot;,&amp;quot;Tochigi&amp;quot;　,&amp;quot;TC&amp;quot;, 15, 7,
+  &amp;quot;群馬&amp;quot;,&amp;quot;Gunma&amp;quot;　,&amp;quot;GU&amp;quot;, 14, 7,
+  &amp;quot;埼玉&amp;quot;,&amp;quot;Saitama&amp;quot;　,&amp;quot;ST&amp;quot;, 14, 6,
+  &amp;quot;千葉&amp;quot;,&amp;quot;Chiba&amp;quot;　,&amp;quot;CB&amp;quot;, 15, 5,
+  &amp;quot;東京&amp;quot;,　&amp;quot;Tokyo&amp;quot;,&amp;quot;TY&amp;quot;, 14, 5,
+  &amp;quot;神奈川&amp;quot;,&amp;quot;Kanagawa&amp;quot;,　&amp;quot;KN&amp;quot;, 14, 4,
+  &amp;quot;新潟&amp;quot;,&amp;quot;Niigata&amp;quot;,　&amp;quot;NI&amp;quot;, 14, 8,
+  &amp;quot;富山&amp;quot;,&amp;quot;Toyama&amp;quot;,　&amp;quot;TM&amp;quot;, 13, 7,
+  &amp;quot;石川&amp;quot;,&amp;quot;Ishikawa&amp;quot;,　&amp;quot;IS&amp;quot;, 12, 7,
+  &amp;quot;福井&amp;quot;,&amp;quot;Fukui&amp;quot;,　&amp;quot;FI&amp;quot;, 12, 6,
+  &amp;quot;山梨&amp;quot;,&amp;quot;Yamanashi&amp;quot;,　&amp;quot;YN&amp;quot;, 13, 5,
+  &amp;quot;長野&amp;quot;,&amp;quot;Nagano&amp;quot;,　&amp;quot;NA&amp;quot;, 13, 6,
+  &amp;quot;岐阜&amp;quot;,&amp;quot;Gifu&amp;quot;,　&amp;quot;GI&amp;quot;, 12, 5,
+  &amp;quot;静岡&amp;quot;,&amp;quot;Shizuoka&amp;quot;,　&amp;quot;SZ&amp;quot;, 13, 4,
+  &amp;quot;愛知&amp;quot;,&amp;quot;Aichi&amp;quot;,　&amp;quot;AI&amp;quot;, 12, 4,
+  &amp;quot;三重&amp;quot;,&amp;quot;Mie&amp;quot;,　&amp;quot;ME&amp;quot;, 11, 4,
+  &amp;quot;滋賀&amp;quot;,&amp;quot;Shiga&amp;quot;,　&amp;quot;SI&amp;quot;, 11, 5,
+  &amp;quot;京都&amp;quot;,&amp;quot;Kyoto&amp;quot;,　&amp;quot;KY&amp;quot;, 10, 5,
+  &amp;quot;大阪&amp;quot;,&amp;quot;Osaka&amp;quot;,　&amp;quot;OS&amp;quot;, 9, 5,
+  &amp;quot;兵庫&amp;quot;,&amp;quot;Hyogo&amp;quot;,　&amp;quot;HG&amp;quot;, 8, 5,
+  &amp;quot;奈良&amp;quot;,&amp;quot;Nara&amp;quot;,　&amp;quot;NR&amp;quot;, 10, 4,
+  &amp;quot;和歌山&amp;quot;,&amp;quot;Wakayama&amp;quot;,　&amp;quot;WA&amp;quot;, 9, 4,
+  &amp;quot;鳥取&amp;quot;,&amp;quot;Tottori&amp;quot;,　&amp;quot;TT&amp;quot;, 7, 5,
+  &amp;quot;島根&amp;quot;,&amp;quot;Shimane&amp;quot;,　&amp;quot;SM&amp;quot;, 6, 5,
+  &amp;quot;岡山&amp;quot;,&amp;quot;Okayama&amp;quot;,　&amp;quot;OY&amp;quot;, 7, 4,
+  &amp;quot;広島&amp;quot;,&amp;quot;Hiroshima&amp;quot;,　&amp;quot;HS&amp;quot;, 6, 4,
+  &amp;quot;山口&amp;quot;,&amp;quot;Yamaguchi&amp;quot;,　&amp;quot;YA&amp;quot;, 5, 5,
+  &amp;quot;徳島&amp;quot;,&amp;quot;Tokushima&amp;quot;　,&amp;quot;TK&amp;quot;, 7, 1,
+  &amp;quot;香川&amp;quot;,&amp;quot;Kagawa&amp;quot;　,&amp;quot;KA&amp;quot;, 7, 2,
+  &amp;quot;愛媛&amp;quot;,&amp;quot;Ehime&amp;quot;　,&amp;quot;EH&amp;quot;, 6, 2,
+  &amp;quot;高知&amp;quot;,&amp;quot;Kochi&amp;quot;,　&amp;quot;KO&amp;quot;, 6, 1,
+  &amp;quot;福岡&amp;quot;,&amp;quot;Fukuoka&amp;quot;　,&amp;quot;FO&amp;quot;, 4, 3,
+  &amp;quot;佐賀&amp;quot;,&amp;quot;Saga&amp;quot;　,&amp;quot;SG&amp;quot;, 3, 3,
+  &amp;quot;長崎&amp;quot;,&amp;quot;Nagasaki&amp;quot;,　&amp;quot;NS&amp;quot;, 2, 3,
+  &amp;quot;熊本&amp;quot;,&amp;quot;Kumamoto&amp;quot;　,&amp;quot;KU&amp;quot;, 3, 2,
+  &amp;quot;大分&amp;quot;,&amp;quot;Oita&amp;quot;　,&amp;quot;OI&amp;quot;, 4, 2,
+  &amp;quot;宮崎&amp;quot;,&amp;quot;Miyazaki&amp;quot;　,&amp;quot;MZ&amp;quot;, 4, 1,
+  &amp;quot;鹿児島&amp;quot;,&amp;quot;Kagoshima&amp;quot; ,&amp;quot;KG&amp;quot;, 3, 1,
+  &amp;quot;沖縄&amp;quot;,&amp;quot;Okinawa&amp;quot;　,&amp;quot;OK&amp;quot;, 1, 1)
 
 # Define Map sizes
-JP_plot&amp;lt;- JP_plot %&amp;gt;% mutate(scale = c(3,rep(1,46)))# because hokkaido is larger than the other prefectures&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;jp_collectivism&amp;lt;- jp_collectivism %&amp;gt;%  left_join(JP_plot,by= &amp;quot;Prefecture&amp;quot;)
-
-##########
-
-
-
+JP_plot&amp;lt;- JP_plot %&amp;gt;% mutate(scale = c(3,rep(1,46)))# because Hokkaido is larger than the other prefectures&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;combining-the-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Combining the data&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;jp_collectivism&amp;lt;- jp_collectivism %&amp;gt;%  left_join(JP_plot,by= &amp;quot;Prefecture&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;creating-the-graphs&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Creating the graphs&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Graph with latin alphabet labels
 graph&amp;lt;- jp_collectivism %&amp;gt;% # data itself
   ggplot(aes(x = x, # x axis
              y = y, # y axis
@@ -110,10 +128,41 @@ graph&amp;lt;- jp_collectivism %&amp;gt;% # data itself
   scale_fill_gradient2(low=&amp;quot;black&amp;quot;, # gradient colours
                      mid=&amp;quot;#DDDDDD&amp;quot;,
                      high=&amp;quot;grey50&amp;quot;,
-                     midpoint = 50) # gradient midpoint&lt;/code&gt;&lt;/pre&gt;
+                     midpoint = 50) # gradient midpoint
+
+# Graph with Japanese labels
+graph1&amp;lt;- jp_collectivism %&amp;gt;% # data itself
+  ggplot(aes(x = x, # x axis
+             y = y, # y axis
+             width = scale, # scale of width
+             height = scale)) +  #scale of height
+  geom_tile(aes(fill = Score), color = &amp;quot;black&amp;quot;) + # variable used to calculate the colour filling of the tiles
+ geom_text(aes(label = Prefecture_jp), size = 2.7, color = &amp;quot;black&amp;quot; ) +   # label and its size and colour
+  coord_fixed(ratio = 1) +  # to keep the ratio between the representation of data and axis
+  theme( # no background, axis, title, ticks or legend
+    panel.background = element_blank(),
+    panel.grid = element_blank(),
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    legend.position = &amp;quot;none&amp;quot;)  +
+
+  scale_fill_gradient2(low=&amp;quot;grey90&amp;quot;, # gradient colours
+                     mid=&amp;quot;steelblue&amp;quot;,
+                     high=&amp;quot;blue&amp;quot;,
+                     midpoint = 50
+                     ) # gradient midpoint&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;plotting-the-graphs&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Plotting the graphs&lt;/h3&gt;
+&lt;p&gt;The first graph has the prefecture names written in Latin Alphabet, prefectures scoring high on collectivism are coloured light grey, and prefectures scoring low on collectivism are coloured black.&lt;br /&gt;
+The second graph has the prefecture names written in Japanese kanji, prefectures scoring high on collectivism are coloured blue, and prefectures scoring low on collectivism are coloured light grey. There is a midpoint coloured steel blue.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(graph)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;print(graph1)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan_files/figure-html/unnamed-chunk-5-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;[1] Yamawaki, N. (2012). Within-culture variations of collectivism in Japan. Journal of Cross-Cultural Psychology, 43(8), 1191-1204.&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     

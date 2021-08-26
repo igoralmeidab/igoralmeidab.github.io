@@ -30,7 +30,7 @@
   
   <meta name="description" content="This visualisation is based on Niwako Yamawaki’s academic article [1] and Masaki Kubota’s R code [2].
 Collectivism is defined in the Oxford dictionary as “the practice or principle of giving a group priority over each individual in it.”
-jp_collectivism&lt;- read_delim(&quot;jp_collectivism.csv&quot;, &quot;;&quot;, escape_double = FALSE, trim_ws = TRUE)## ## -- Column specification --------------------------------------------------------## cols(## Rank = col_double(),## Prefecture = col_character(),## Score = col_double()## )information japan map">
+Yamawaki measured collectivism based on divorce to marriage rate, percentage of households with three generations living together, percentage of elderly people (aged 65&#43; years) living alone (reverse scored), percentage of nuclear family households (reverse scored), and percentage of people living alone (reverse scored).">
 
   
   <link rel="alternate" hreflang="en-us" href="https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/">
@@ -238,10 +238,10 @@ jp_collectivism&lt;- read_delim(&quot;jp_collectivism.csv&quot;, &quot;;&quot;, 
   
   <meta property="og:site_name" content="Igor de Almeida">
   <meta property="og:url" content="https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/">
-  <meta property="og:title" content="A map of Japanese collectivism | Igor de Almeida">
+  <meta property="og:title" content="Tile maps of Japanese collectivism | Igor de Almeida">
   <meta property="og:description" content="This visualisation is based on Niwako Yamawaki’s academic article [1] and Masaki Kubota’s R code [2].
 Collectivism is defined in the Oxford dictionary as “the practice or principle of giving a group priority over each individual in it.”
-jp_collectivism&lt;- read_delim(&quot;jp_collectivism.csv&quot;, &quot;;&quot;, escape_double = FALSE, trim_ws = TRUE)## ## -- Column specification --------------------------------------------------------## cols(## Rank = col_double(),## Prefecture = col_character(),## Score = col_double()## )information japan map"><meta property="og:image" content="https://igoralmeidab.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
+Yamawaki measured collectivism based on divorce to marriage rate, percentage of households with three generations living together, percentage of elderly people (aged 65&#43; years) living alone (reverse scored), percentage of nuclear family households (reverse scored), and percentage of people living alone (reverse scored)."><meta property="og:image" content="https://igoralmeidab.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png">
   <meta property="twitter:image" content="https://igoralmeidab.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_3.png"><meta property="og:locale" content="en-us">
   
     
@@ -275,7 +275,7 @@ jp_collectivism&lt;- read_delim(&quot;jp_collectivism.csv&quot;, &quot;;&quot;, 
     "@type": "WebPage",
     "@id": "https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/"
   },
-  "headline": "A map of Japanese collectivism",
+  "headline": "Tile maps of Japanese collectivism",
   
   "datePublished": "2021-04-04T00:00:00Z",
   "dateModified": "2021-04-04T18:04:04+09:00",
@@ -293,7 +293,7 @@ jp_collectivism&lt;- read_delim(&quot;jp_collectivism.csv&quot;, &quot;;&quot;, 
       "url": "img/https://igoralmeidab.github.io/"
     }
   },
-  "description": "This visualisation is based on Niwako Yamawaki’s academic article [1] and Masaki Kubota’s R code [2].\nCollectivism is defined in the Oxford dictionary as “the practice or principle of giving a group priority over each individual in it.”\njp_collectivism\u0026lt;- read_delim(\u0026quot;jp_collectivism.csv\u0026quot;, \u0026quot;;\u0026quot;, escape_double = FALSE, trim_ws = TRUE)\r## ## -- Column specification --------------------------------------------------------\r## cols(\r## Rank = col_double(),\r## Prefecture = col_character(),\r## Score = col_double()\r## )\rinformation japan map"
+  "description": "This visualisation is based on Niwako Yamawaki’s academic article [1] and Masaki Kubota’s R code [2].\nCollectivism is defined in the Oxford dictionary as “the practice or principle of giving a group priority over each individual in it.”\nYamawaki measured collectivism based on divorce to marriage rate, percentage of households with three generations living together, percentage of elderly people (aged 65+ years) living alone (reverse scored), percentage of nuclear family households (reverse scored), and percentage of people living alone (reverse scored)."
 }
 </script>
 
@@ -311,7 +311,7 @@ jp_collectivism&lt;- read_delim(&quot;jp_collectivism.csv&quot;, &quot;;&quot;, 
 
 
 
-  <title>A map of Japanese collectivism | Igor de Almeida</title>
+  <title>Tile maps of Japanese collectivism | Igor de Almeida</title>
 
 </head>
 
@@ -537,7 +537,7 @@ jp_collectivism&lt;- read_delim(&quot;jp_collectivism.csv&quot;, &quot;;&quot;, 
   
   
 <div class="article-container pt-3">
-  <h1>A map of Japanese collectivism</h1>
+  <h1>Tile maps of Japanese collectivism</h1>
 
   
 
@@ -567,7 +567,7 @@ jp_collectivism&lt;- read_delim(&quot;jp_collectivism.csv&quot;, &quot;;&quot;, 
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    3 min read
+    4 min read
   </span>
   
 
@@ -612,8 +612,23 @@ jp_collectivism&lt;- read_delim(&quot;jp_collectivism.csv&quot;, &quot;;&quot;, 
 
 
 <p>This visualisation is based on Niwako Yamawaki’s academic article [1] and <a href="https://qiita.com/masaki_kubota/items/98ddec63492a8d71f9d1">Masaki Kubota’s R code</a> [2].</p>
-<p>Collectivism is defined in the Oxford dictionary as “the practice or principle of giving a group priority over each individual in it.”</p>
-<pre class="r"><code>jp_collectivism&lt;- read_delim(&quot;jp_collectivism.csv&quot;, 
+<p>Collectivism is defined in the Oxford dictionary as “the practice or principle of giving a group priority over each individual in it.”<br />
+Yamawaki measured collectivism based on divorce to marriage rate, percentage of households with three generations living together, percentage of elderly people (aged 65+ years) living alone (reverse scored), percentage of nuclear family households (reverse scored), and percentage of people living alone (reverse scored). Then, a scale was created and each Japanese prefecture got a score. See details in the original article.</p>
+<p>Here I got these scores of collectivism, combined with Kubora’s code, and made two tile maps of Japan.</p>
+<pre class="r"><code># Packages
+library(dplyr)</code></pre>
+<pre><code>## 
+##  次のパッケージを付け加えます: &#39;dplyr&#39;</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;package:stats&#39; からマスクされています: 
+## 
+##      filter, lag</code></pre>
+<pre><code>##  以下のオブジェクトは &#39;package:base&#39; からマスクされています: 
+## 
+##      intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(ggplot2)
+library(readr)</code></pre>
+<pre class="r"><code># Data with collectivism scores
+jp_collectivism&lt;- read_delim(&quot;jp_collectivism.csv&quot;, 
                              &quot;;&quot;, escape_double = FALSE, trim_ws = TRUE)</code></pre>
 <pre><code>## 
 ## -- Column specification --------------------------------------------------------
@@ -622,65 +637,68 @@ jp_collectivism&lt;- read_delim(&quot;jp_collectivism.csv&quot;, &quot;;&quot;, 
 ##   Prefecture = col_character(),
 ##   Score = col_double()
 ## )</code></pre>
-<p>information japan map</p>
+<div id="data-necessary-to-plot-the-tile-maps" class="section level3">
+<h3>Data necessary to plot the tile maps</h3>
 <pre class="r"><code>JP_plot &lt;- tribble(
   ~Prefecture_jp,~Prefecture ,~Code, ~x, ~y,
   &quot;北海道&quot;, &quot;Hokkaido&quot;,&quot;HK&quot;, 16, 14,
-  &quot;青森県&quot;,&quot;Aomori&quot;　,&quot;AO&quot;, 15, 11,
-  &quot;岩手県&quot;,&quot;Iwate&quot;　,&quot;IT&quot;, 15, 10,
-  &quot;宮城県&quot;,&quot;Miyagi&quot;　,&quot;MG&quot;, 15, 9,
-  &quot;秋田県&quot;,&quot;Akita&quot;　,&quot;AK&quot;, 14, 10,
-  &quot;山形県&quot;,&quot;Yamagata&quot;　,&quot;YG&quot;, 14, 9,
-  &quot;福島県&quot;,&quot;Fukushima&quot;　,&quot;FS&quot;, 15, 8,
-  &quot;茨城県&quot;,&quot;Ibaraki&quot;　,&quot;IB&quot;, 15, 6,
-  &quot;栃木県&quot;,&quot;Tochigi&quot;　,&quot;TC&quot;, 15, 7,
-  &quot;群馬県&quot;,&quot;Gunma&quot;　,&quot;GU&quot;, 14, 7,
-  &quot;埼玉県&quot;,&quot;Saitama&quot;　,&quot;ST&quot;, 14, 6,
-  &quot;千葉県&quot;,&quot;Chiba&quot;　,&quot;CB&quot;, 15, 5,
-  &quot;東京都&quot;,　&quot;Tokyo&quot;,&quot;TY&quot;, 14, 5,
-  &quot;神奈川県&quot;,&quot;Kanagawa&quot;,　&quot;KN&quot;, 14, 4,
-  &quot;新潟県&quot;,&quot;Niigata&quot;,　&quot;NI&quot;, 14, 8,
-  &quot;富山県&quot;,&quot;Toyama&quot;,　&quot;TM&quot;, 13, 7,
-  &quot;石川県&quot;,&quot;Ishikawa&quot;,　&quot;IS&quot;, 12, 7,
-  &quot;福井県&quot;,&quot;Fukui&quot;,　&quot;FI&quot;, 12, 6,
-  &quot;山梨県&quot;,&quot;Yamanashi&quot;,　&quot;YN&quot;, 13, 5,
-  &quot;長野県&quot;,&quot;Nagano&quot;,　&quot;NA&quot;, 13, 6,
-  &quot;岐阜県&quot;,&quot;Gifu&quot;,　&quot;GI&quot;, 12, 5,
-  &quot;静岡県&quot;,&quot;Shizuoka&quot;,　&quot;SZ&quot;, 13, 4,
-  &quot;愛知県&quot;,&quot;Aichi&quot;,　&quot;AI&quot;, 12, 4,
-  &quot;三重県&quot;,&quot;Mie&quot;,　&quot;ME&quot;, 11, 4,
-  &quot;滋賀県&quot;,&quot;Shiga&quot;,　&quot;SI&quot;, 11, 5,
-  &quot;京都府&quot;,&quot;Kyoto&quot;,　&quot;KY&quot;, 10, 5,
-  &quot;大阪府&quot;,&quot;Osaka&quot;,　&quot;OS&quot;, 9, 5,
-  &quot;兵庫県&quot;,&quot;Hyogo&quot;,　&quot;HG&quot;, 8, 5,
-  &quot;奈良県&quot;,&quot;Nara&quot;,　&quot;NR&quot;, 10, 4,
-  &quot;和歌山県&quot;,&quot;Wakayama&quot;,　&quot;WA&quot;, 9, 4,
-  &quot;鳥取県&quot;,&quot;Tottori&quot;,　&quot;TT&quot;, 7, 5,
-  &quot;島根県&quot;,&quot;Shimane&quot;,　&quot;SM&quot;, 6, 5,
-  &quot;岡山県&quot;,&quot;Okayama&quot;,　&quot;OY&quot;, 7, 4,
-  &quot;広島県&quot;,&quot;Hiroshima&quot;,　&quot;HS&quot;, 6, 4,
-  &quot;山口県&quot;,&quot;Yamaguchi&quot;,　&quot;YA&quot;, 5, 5,
-  &quot;徳島県&quot;,&quot;Tokushima&quot;　,&quot;TK&quot;, 7, 1,
-  &quot;香川県&quot;,&quot;Kagawa&quot;　,&quot;KA&quot;, 7, 2,
-  &quot;愛媛県&quot;,&quot;Ehime&quot;　,&quot;EH&quot;, 6, 2,
-  &quot;高知県&quot;,&quot;Kochi&quot;,　&quot;KO&quot;, 6, 1,
-  &quot;福岡県&quot;,&quot;Fukuoka&quot;　,&quot;FO&quot;, 4, 3,
-  &quot;佐賀県&quot;,&quot;Saga&quot;　,&quot;SG&quot;, 3, 3,
-  &quot;長崎県&quot;,&quot;Nagasaki&quot;,　&quot;NS&quot;, 2, 3,
-  &quot;熊本県&quot;,&quot;Kumamoto&quot;　,&quot;KU&quot;, 3, 2,
-  &quot;大分県&quot;,&quot;Oita&quot;　,&quot;OI&quot;, 4, 2,
-  &quot;宮崎県&quot;,&quot;Miyazaki&quot;　,&quot;MZ&quot;, 4, 1,
-  &quot;鹿児島県&quot;,&quot;Kagoshima&quot; ,&quot;KG&quot;, 3, 1,
-  &quot;沖縄県&quot;,&quot;Okinawa&quot;　,&quot;OK&quot;, 1, 1)
+  &quot;青森&quot;,&quot;Aomori&quot;　,&quot;AO&quot;, 15, 11,
+  &quot;岩手&quot;,&quot;Iwate&quot;　,&quot;IT&quot;, 15, 10,
+  &quot;宮城&quot;,&quot;Miyagi&quot;　,&quot;MG&quot;, 15, 9,
+  &quot;秋田&quot;,&quot;Akita&quot;　,&quot;AK&quot;, 14, 10,
+  &quot;山形&quot;,&quot;Yamagata&quot;　,&quot;YG&quot;, 14, 9,
+  &quot;福島&quot;,&quot;Fukushima&quot;　,&quot;FS&quot;, 15, 8,
+  &quot;茨城&quot;,&quot;Ibaraki&quot;　,&quot;IB&quot;, 15, 6,
+  &quot;栃木&quot;,&quot;Tochigi&quot;　,&quot;TC&quot;, 15, 7,
+  &quot;群馬&quot;,&quot;Gunma&quot;　,&quot;GU&quot;, 14, 7,
+  &quot;埼玉&quot;,&quot;Saitama&quot;　,&quot;ST&quot;, 14, 6,
+  &quot;千葉&quot;,&quot;Chiba&quot;　,&quot;CB&quot;, 15, 5,
+  &quot;東京&quot;,　&quot;Tokyo&quot;,&quot;TY&quot;, 14, 5,
+  &quot;神奈川&quot;,&quot;Kanagawa&quot;,　&quot;KN&quot;, 14, 4,
+  &quot;新潟&quot;,&quot;Niigata&quot;,　&quot;NI&quot;, 14, 8,
+  &quot;富山&quot;,&quot;Toyama&quot;,　&quot;TM&quot;, 13, 7,
+  &quot;石川&quot;,&quot;Ishikawa&quot;,　&quot;IS&quot;, 12, 7,
+  &quot;福井&quot;,&quot;Fukui&quot;,　&quot;FI&quot;, 12, 6,
+  &quot;山梨&quot;,&quot;Yamanashi&quot;,　&quot;YN&quot;, 13, 5,
+  &quot;長野&quot;,&quot;Nagano&quot;,　&quot;NA&quot;, 13, 6,
+  &quot;岐阜&quot;,&quot;Gifu&quot;,　&quot;GI&quot;, 12, 5,
+  &quot;静岡&quot;,&quot;Shizuoka&quot;,　&quot;SZ&quot;, 13, 4,
+  &quot;愛知&quot;,&quot;Aichi&quot;,　&quot;AI&quot;, 12, 4,
+  &quot;三重&quot;,&quot;Mie&quot;,　&quot;ME&quot;, 11, 4,
+  &quot;滋賀&quot;,&quot;Shiga&quot;,　&quot;SI&quot;, 11, 5,
+  &quot;京都&quot;,&quot;Kyoto&quot;,　&quot;KY&quot;, 10, 5,
+  &quot;大阪&quot;,&quot;Osaka&quot;,　&quot;OS&quot;, 9, 5,
+  &quot;兵庫&quot;,&quot;Hyogo&quot;,　&quot;HG&quot;, 8, 5,
+  &quot;奈良&quot;,&quot;Nara&quot;,　&quot;NR&quot;, 10, 4,
+  &quot;和歌山&quot;,&quot;Wakayama&quot;,　&quot;WA&quot;, 9, 4,
+  &quot;鳥取&quot;,&quot;Tottori&quot;,　&quot;TT&quot;, 7, 5,
+  &quot;島根&quot;,&quot;Shimane&quot;,　&quot;SM&quot;, 6, 5,
+  &quot;岡山&quot;,&quot;Okayama&quot;,　&quot;OY&quot;, 7, 4,
+  &quot;広島&quot;,&quot;Hiroshima&quot;,　&quot;HS&quot;, 6, 4,
+  &quot;山口&quot;,&quot;Yamaguchi&quot;,　&quot;YA&quot;, 5, 5,
+  &quot;徳島&quot;,&quot;Tokushima&quot;　,&quot;TK&quot;, 7, 1,
+  &quot;香川&quot;,&quot;Kagawa&quot;　,&quot;KA&quot;, 7, 2,
+  &quot;愛媛&quot;,&quot;Ehime&quot;　,&quot;EH&quot;, 6, 2,
+  &quot;高知&quot;,&quot;Kochi&quot;,　&quot;KO&quot;, 6, 1,
+  &quot;福岡&quot;,&quot;Fukuoka&quot;　,&quot;FO&quot;, 4, 3,
+  &quot;佐賀&quot;,&quot;Saga&quot;　,&quot;SG&quot;, 3, 3,
+  &quot;長崎&quot;,&quot;Nagasaki&quot;,　&quot;NS&quot;, 2, 3,
+  &quot;熊本&quot;,&quot;Kumamoto&quot;　,&quot;KU&quot;, 3, 2,
+  &quot;大分&quot;,&quot;Oita&quot;　,&quot;OI&quot;, 4, 2,
+  &quot;宮崎&quot;,&quot;Miyazaki&quot;　,&quot;MZ&quot;, 4, 1,
+  &quot;鹿児島&quot;,&quot;Kagoshima&quot; ,&quot;KG&quot;, 3, 1,
+  &quot;沖縄&quot;,&quot;Okinawa&quot;　,&quot;OK&quot;, 1, 1)
 
 # Define Map sizes
-JP_plot&lt;- JP_plot %&gt;% mutate(scale = c(3,rep(1,46)))# because hokkaido is larger than the other prefectures</code></pre>
-<pre class="r"><code>jp_collectivism&lt;- jp_collectivism %&gt;%  left_join(JP_plot,by= &quot;Prefecture&quot;)
-
-##########
-
-
-
+JP_plot&lt;- JP_plot %&gt;% mutate(scale = c(3,rep(1,46)))# because Hokkaido is larger than the other prefectures</code></pre>
+</div>
+<div id="combining-the-data" class="section level3">
+<h3>Combining the data</h3>
+<pre class="r"><code>jp_collectivism&lt;- jp_collectivism %&gt;%  left_join(JP_plot,by= &quot;Prefecture&quot;)</code></pre>
+</div>
+<div id="creating-the-graphs" class="section level3">
+<h3>Creating the graphs</h3>
+<pre class="r"><code># Graph with latin alphabet labels
 graph&lt;- jp_collectivism %&gt;% # data itself
   ggplot(aes(x = x, # x axis
              y = y, # y axis
@@ -700,10 +718,41 @@ graph&lt;- jp_collectivism %&gt;% # data itself
   scale_fill_gradient2(low=&quot;black&quot;, # gradient colours
                      mid=&quot;#DDDDDD&quot;,
                      high=&quot;grey50&quot;,
-                     midpoint = 50) # gradient midpoint</code></pre>
+                     midpoint = 50) # gradient midpoint
+
+# Graph with Japanese labels
+graph1&lt;- jp_collectivism %&gt;% # data itself
+  ggplot(aes(x = x, # x axis
+             y = y, # y axis
+             width = scale, # scale of width
+             height = scale)) +  #scale of height
+  geom_tile(aes(fill = Score), color = &quot;black&quot;) + # variable used to calculate the colour filling of the tiles
+ geom_text(aes(label = Prefecture_jp), size = 2.7, color = &quot;black&quot; ) +   # label and its size and colour
+  coord_fixed(ratio = 1) +  # to keep the ratio between the representation of data and axis
+  theme( # no background, axis, title, ticks or legend
+    panel.background = element_blank(),
+    panel.grid = element_blank(),
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    legend.position = &quot;none&quot;)  +
+
+  scale_fill_gradient2(low=&quot;grey90&quot;, # gradient colours
+                     mid=&quot;steelblue&quot;,
+                     high=&quot;blue&quot;,
+                     midpoint = 50
+                     ) # gradient midpoint</code></pre>
+</div>
+<div id="plotting-the-graphs" class="section level3">
+<h3>Plotting the graphs</h3>
+<p>The first graph has the prefecture names written in Latin Alphabet, prefectures scoring high on collectivism are coloured light grey, and prefectures scoring low on collectivism are coloured black.<br />
+The second graph has the prefecture names written in Japanese kanji, prefectures scoring high on collectivism are coloured blue, and prefectures scoring low on collectivism are coloured light grey. There is a midpoint coloured steel blue.</p>
 <pre class="r"><code>print(graph)</code></pre>
 <p><img src="/post/2021-04-03-collectivism_maps_japan_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>print(graph1)</code></pre>
+<p><img src="/post/2021-04-03-collectivism_maps_japan_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 <p>[1] Yamawaki, N. (2012). Within-culture variations of collectivism in Japan. Journal of Cross-Cultural Psychology, 43(8), 1191-1204.</p>
+</div>
 
     </div>
 
@@ -726,7 +775,7 @@ graph&lt;- jp_collectivism %&gt;% # data itself
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/&amp;text=A%20map%20of%20Japanese%20collectivism" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/&amp;text=Tile%20maps%20of%20Japanese%20collectivism" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -739,7 +788,7 @@ graph&lt;- jp_collectivism %&gt;% # data itself
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/&amp;t=A%20map%20of%20Japanese%20collectivism" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/&amp;t=Tile%20maps%20of%20Japanese%20collectivism" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -752,7 +801,7 @@ graph&lt;- jp_collectivism %&gt;% # data itself
       
       
       <li>
-        <a href="mailto:?subject=A%20map%20of%20Japanese%20collectivism&amp;body=https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Tile%20maps%20of%20Japanese%20collectivism&amp;body=https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -765,7 +814,7 @@ graph&lt;- jp_collectivism %&gt;% # data itself
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/&amp;title=A%20map%20of%20Japanese%20collectivism" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/&amp;title=Tile%20maps%20of%20Japanese%20collectivism" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -778,7 +827,7 @@ graph&lt;- jp_collectivism %&gt;% # data itself
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=A%20map%20of%20Japanese%20collectivism%20https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Tile%20maps%20of%20Japanese%20collectivism%20https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -791,7 +840,7 @@ graph&lt;- jp_collectivism %&gt;% # data itself
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/&amp;title=A%20map%20of%20Japanese%20collectivism" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://igoralmeidab.github.io/post/2021-04-03-collectivism_maps_japan/&amp;title=Tile%20maps%20of%20Japanese%20collectivism" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
